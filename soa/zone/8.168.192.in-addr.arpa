@@ -1,0 +1,21 @@
+$ORIGIN 8.168.192.in-addr.arpa.
+$TTL 604800
+
+@ IN SOA ns.intranet.ephecti.be. dallenogare.intranet.ephecti.be.(
+        2001062501      ; serial  zone reverse
+        604800 ; refresh after x h
+        86400  ;retry after x hour
+        2419200  ; expire after x week
+        604800) ; minimum TTL of x day
+
+		
+; name servers - NS record		
+@ IN NS ns.intranet.ephecti.be.
+
+; name servers - A record
+ns	IN	A	192.168.8.2
+
+1 PTR erp.intranet.ephecti.be.
+2 PTR ns.intranet.ephecti.be.
+3 PTR resolv.intranet.ephecti.be.
+4 PTR baseddon.intranet.ephecti.be.

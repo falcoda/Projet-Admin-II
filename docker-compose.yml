@@ -1,0 +1,55 @@
+version: "2"
+
+services:
+
+  resolver:
+    build: ./resolver/.
+    ports:
+      - 53:53
+    networks:
+      interne:
+          ipv4_address: 192.168.8.3
+    volumes:
+      - ./resolver/named.conf:/etc/bind/named.conf
+    container_name: resolver
+    command: "named -c /etc/bind/named.conf -g"
+   
+
+  soa:
+    build: ./soa/.
+    ports:
+      - 53:53
+    networks:
+      interne:
+          ipv4_address: 192.168.8.2
+    volumes:
+      - ./soa/named.conf:/etc/bind/named.conf
+      - ./soa/zone/8.168.192.in-addr.arpa:/etc/bind/master/8.168.192.in-addr.arpa
+      - ./soa/zone/intranet.ephecti.be:/etc/bind/master/intranet.ephecti.be
+      - ./soa/resolv.conf:/etc/resolv.conf
+    container_name: soa
+    command: "named -c /etc/bind/named.conf -g"
+    
+  web:
+    build: ./web/.
+    ports:
+      - 8080:80
+    networks:
+      interne:
+          ipv4_address: 192.168.8.1
+    volumes:
+      - ./web/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    container_name: web
+   
+
+networks:
+
+  interne:
+      ipam:
+          driver: default
+          config:
+              - subnet: 192.168.8.0/24
+                gateway:  192.168.8.254
+                
+                
+
