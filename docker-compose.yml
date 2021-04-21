@@ -28,19 +28,53 @@ services:
       - ./soa/zone/intranet.ephecti.be:/etc/bind/master/intranet.ephecti.be
       - ./soa/resolv.conf:/etc/resolv.conf
     container_name: soa
+    
     command: "named -c /etc/bind/named.conf -g"
     
-  web:
-    build: ./web/.
+  erp:
+    build: ./erp/.
     ports:
       - 8080:80
     networks:
       interne:
           ipv4_address: 192.168.8.1
     volumes:
-      - ./web/httpd.conf:/usr/local/apache2/conf/httpd.conf
-    container_name: web
-   
+      - ./erp/www:/var/www/html/
+      - ./erp/.htaccess:/var/www/html/.htaccess
+      - ./erp/apache2.conf:/etc/apache2/apache2.conf
+    links:
+      - db
+    container_name: erp
+    
+  db:
+    image: mysql:8.0.16
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+    ports: 
+        - "3306:3306"
+    networks:
+      interne:
+          ipv4_address: 192.168.8.4
+    environment:
+        MYSQL_DATABASE: myDb
+        MYSQL_USER: coda
+        MYSQL_PASSWORD: test
+        MYSQL_ROOT_PASSWORD: test
+    volumes:
+        - ./erp/datas:/docker-entrypoint-initdb.d
+        - persistent:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.8
+    links: 
+        - db:db
+    ports:
+        - 8000:80
+    environment:
+        MYSQL_USER: coda
+        MYSQL_PASSWORD: test
+        MYSQL_ROOT_PASSWORD: test
+volumes:
+    persistent:     
 
 networks:
 
