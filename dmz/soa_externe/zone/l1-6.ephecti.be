@@ -9,16 +9,17 @@ $TTL 604800      ; 1 day
                                 )
 
 	IN	NS 	ns.l1-6.ephecti.be. 
+	
+; name server
 ns	   IN A 135.125.101.227
 	   IN	MX	10	mail
 
+
+; web externe
 www            IN        A       135.125.101.227
 b2b            IN        A       135.125.101.227
+
+
+; mail
 mail           IN        A       135.125.101.227
 
-
-
-; voip
-sip    		   IN        A        IP du vps
-_sip._tcp     SRV     0       0       5060        sip
-_sip._udp     SRV     0       0       5060        sip
