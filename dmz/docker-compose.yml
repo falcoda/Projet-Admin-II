@@ -1,0 +1,42 @@
+version: "2"
+
+services:
+
+  
+  web:
+    build: ./web/.
+    ports:
+      - 8080:80
+    networks:
+      externe:
+          ipv4_address: 192.168.7.1
+    volumes:
+      - ./web/www:/var/www/html/
+      - ./web/b2b:/var/www/b2b/
+      - ./web/apache2.conf:/etc/apache2/apache2.conf
+
+    container_name: web 
+  
+  
+  soa_externe_externe:
+    build: ./soa_externe_externe/.
+    ports:
+      - 53:53
+    networks:
+      externe:
+          ipv4_address: 192.168.7.2
+    volumes:
+      - ./soa_externe/named.conf:/etc/bind/named.conf
+      - ./soa_externe/zone/l1-6.ephecti.be:/etc/bind/master/l1-6.ephecti.be
+    container_name: soa_externe
+    
+    command: "named -c /etc/bind/named.conf -g"
+    
+networks:
+
+  externe:
+      ipam:
+          driver: default
+          config:
+              - subnet: 192.168.7.0/24
+                gateway:  192.168.7.254
