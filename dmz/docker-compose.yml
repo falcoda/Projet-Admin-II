@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:80
     networks:
-      externe:
+      reseau_dmz:
           ipv4_address: 192.168.7.1
     volumes:
       - ./web/www:/var/www/html/
@@ -18,23 +18,23 @@ services:
     container_name: web 
   
   
-  soa_externe_externe:
-    build: ./soa_externe_externe/.
+  soa_externe:
+    build: ./soa_externe/.
     ports:
       - 53:53
     networks:
-      externe:
+      reseau_dmz:
           ipv4_address: 192.168.7.2
     volumes:
       - ./soa_externe/named.conf:/etc/bind/named.conf
-      - ./soa_externe/zone/l1-6.ephecti.be:/etc/bind/master/l1-6.ephecti.be
+      - ./soa_externe/zone/l1-6.ephec-ti.be:/etc/bind/master/l1-6.ephec-ti.be
     container_name: soa_externe
     
     command: "named -c /etc/bind/named.conf -g"
     
 networks:
 
-  externe:
+  reseau_dmz:
       ipam:
           driver: default
           config:

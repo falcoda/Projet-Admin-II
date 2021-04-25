@@ -11,6 +11,7 @@ services:
           ipv4_address: 192.168.8.3
     volumes:
       - ./resolver/named.conf:/etc/bind/named.conf
+      - ./resolv.conf:/etc/resolv.conf
     container_name: resolver
     command: "named -c /etc/bind/named.conf -g"
    
@@ -22,11 +23,23 @@ services:
     networks:
       interne:
           ipv4_address: 192.168.8.2
+      reseau_compta:
+          ipv4_address: 192.168.1.2
+      reseau_direction:
+          ipv4_address: 192.168.2.2
+      reseau_secretariat:
+          ipv4_address: 192.168.3.2
+      reseau_production:
+          ipv4_address: 192.168.4.2
+      reseau_hangar:
+          ipv4_address: 192.168.5.2
+      reseau_commerciaux:
+          ipv4_address: 192.168.6.2
     volumes:
       - ./soa/named.conf:/etc/bind/named.conf
       - ./soa/zone/8.168.192.in-addr.arpa:/etc/bind/master/8.168.192.in-addr.arpa
-      - ./soa/zone/intranet.ephecti.be:/etc/bind/master/intranet.ephecti.be
-      - ./soa/resolv.conf:/etc/resolv.conf
+      - ./soa/zone/intranet:/etc/bind/master/intranet
+      - ./resolv.conf:/etc/resolv.conf
     container_name: soa
     
     command: "named -c /etc/bind/named.conf -g"
@@ -42,6 +55,7 @@ services:
       - ./erp/www:/var/www/html/
       - ./erp/.htaccess:/var/www/html/.htaccess
       - ./erp/apache2.conf:/etc/apache2/apache2.conf
+      - ./resolv.conf:/etc/resolv.conf
     links:
       - db
     container_name: erp
@@ -59,6 +73,7 @@ services:
     volumes:
         - ./erp/datas:/docker-entrypoint-initdb.d
         - persistent:/var/lib/mysql
+        - ./resolv.conf:/etc/resolv.conf
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.8
@@ -72,12 +87,65 @@ services:
   compta:
     build: ./entreprise/compta/.
     networks:
-      reseau_entreprise:
+      reseau_compta:
           ipv4_address: 192.168.1.1
+      interne:
+          ipv4_address: 192.168.8.11
     volumes:
       - ./entreprise/compta/resolv.conf:/etc/resolv.conf
+    links:
+      - direction
     container_name: compta
     
+    
+  direction:
+    build: ./entreprise/direction/.
+    networks:
+      reseau_direction:
+          ipv4_address: 192.168.2.1
+      interne:
+          ipv4_address: 192.168.8.12
+    volumes:
+      - ./entreprise/direction/resolv.conf:/etc/resolv.conf
+    container_name: direction 
+    
+  secretariat:
+    build: ./entreprise/secretariat/.
+    networks:
+      reseau_secretariat:
+          ipv4_address: 192.168.3.1
+      interne:
+          ipv4_address: 192.168.8.13
+    volumes:
+      - ./entreprise/secretariat/resolv.conf:/etc/resolv.conf
+    container_name: secretariat 
+    
+  production:
+    build: ./entreprise/production/.
+    networks:
+      reseau_production:
+          ipv4_address: 192.168.4.1
+    volumes:
+      - ./entreprise/production/resolv.conf:/etc/resolv.conf
+    container_name: production    
+    
+  hangar:
+    build: ./entreprise/hangar/.
+    networks:
+      reseau_hangar:
+          ipv4_address: 192.168.5.1
+    volumes:
+      - ./entreprise/hangar/resolv.conf:/etc/resolv.conf
+    container_name: hangar 
+    
+  commerciaux:
+    build: ./entreprise/commerciaux/.
+    networks:
+      reseau_commerciaux:
+          ipv4_address: 192.168.6.1
+    volumes:
+      - ./entreprise/commerciaux/resolv.conf:/etc/resolv.conf
+    container_name: commerciaux    
     
 volumes:
     persistent:     
@@ -86,7 +154,6 @@ volumes:
 networks:
 
   interne:
-      driver: bridge
       ipam:
           driver: default
           config:
@@ -95,9 +162,45 @@ networks:
                 
  
  
-  reseau_entreprise:
+  reseau_compta:
       ipam:
           driver: default
           config:
               - subnet: 192.168.1.0/24
                 gateway:  192.168.1.254
+                
+  reseau_direction:
+      ipam:
+          driver: default
+          config:
+              - subnet: 192.168.2.0/24
+                gateway:  192.168.2.254
+
+  reseau_secretariat:
+      ipam:
+          driver: default
+          config:
+              - subnet: 192.168.3.0/24
+                gateway:  192.168.3.254
+                
+  reseau_production:
+      ipam:
+          driver: default
+          config:
+              - subnet: 192.168.4.0/24
+                gateway:  192.168.4.254
+                
+  reseau_hangar:
+      ipam:
+          driver: default
+          config:
+              - subnet: 192.168.5.0/24
+                gateway:  192.168.5.254              
+
+
+  reseau_commerciaux:
+      ipam:
+          driver: default
+          config:
+              - subnet: 192.168.6.0/24
+                gateway:  192.168.6.254              
