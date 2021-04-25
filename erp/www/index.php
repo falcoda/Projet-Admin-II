@@ -1,5 +1,5 @@
 <?php
-    $connexion = mysqli_connect('192.168.8.4:3306', 'Utilisateur', 'Mot de passe', 'myDb')or die('Erreur de connexion');
+    $connexion = mysqli_connect('192.168.8.4:3306', 'root', 'test', 'myDb')or die('Erreur de connexion');
 ?>
 <html lang = "fr">
 	<head>
@@ -12,7 +12,7 @@
 		<?php
 				$test = mysqli_query($connexion,'SELECT * FROM objets;');
 			while($result = mysqli_fetch_row($test)) {
-				 print '<p>Article : '.$result[0].'. Prix : '.$result[1].'â‚¬</p>';
+				 print '<p>Article : '.$result[0].'. Prix : '.$result[1].'€</p>';
 			};
 			 mysqli_close($connexion);
 		?>
