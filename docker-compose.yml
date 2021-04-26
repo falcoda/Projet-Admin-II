@@ -93,8 +93,6 @@ services:
           ipv4_address: 192.168.8.11
     volumes:
       - ./entreprise/compta/resolv.conf:/etc/resolv.conf
-    links:
-      - direction
     container_name: compta
     
     
@@ -107,6 +105,8 @@ services:
           ipv4_address: 192.168.8.12
     volumes:
       - ./entreprise/direction/resolv.conf:/etc/resolv.conf
+    links:
+      - "compta:compta"
     container_name: direction 
     
   secretariat:
