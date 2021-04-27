@@ -8,10 +8,10 @@ $TTL 604800
                                 604800     ; minimum (1 week)
                                 )
 ; name servers - NS record								
-        IN     NS    ns.l1-6.ephec-ti.be.
-ns	    IN     A    135.125.101.227
+l1-6.ephec-ti.be.        IN     NS    ns.l1-6.ephec-ti.be.
+ns	    IN     A    135.125.101.227;
 
 
 ; name servers - A record
-www         IN        A       135.125.101.227
-b2b         IN        A       135.125.101.227
+www         IN        A       135.125.101.227;
+b2b         IN        A       135.125.101.227;

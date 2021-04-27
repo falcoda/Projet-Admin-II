@@ -1,0 +1,4 @@
+zone "l1-6.ephec-ti.be"{                                         
+        type master;                                                  
+        file "/etc/bind/zones/db.l1-6.ephec-ti.be";
+};
