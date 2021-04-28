@@ -1,5 +1,5 @@
 <?php
-    $connexion = mysqli_connect('135.125.101.214:3306', 'root', 'test', 'myDb')or die('Erreur de connexion');
+    $connexion = mysqli_connect('135.125.101.214:3306', 'user', 'mdp', 'myDb')or die('Erreur de connexion');
 ?>
 <html lang = "fr">
 	<head>
