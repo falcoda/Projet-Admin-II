@@ -1,6 +1,9 @@
 <?php
     $connexion = mysqli_connect('ip', 'user', 'mdp', 'myDb')or die('Erreur de connexion');
+<<<<<<< HEAD
     //connexion à la base de donnée
+=======
+>>>>>>> 8dbd93c4ff3f2ef62b060c687cbc46062b611add
 ?>
 <html lang = "fr">
 	<head>
