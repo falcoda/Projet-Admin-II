@@ -1,20 +1,19 @@
 options {
-	directory "/var/cache/bind";
+	directory "/var/cache/bind"; #chemin de la directory
 	
-	querylog yes;
+	querylog yes;  
 
-	listen-on { any; };
-	allow-query { any; };
+	listen-on { any; };   #permet de configurer les IP ou ont ecoute
+	allow-query { any; };   #permet d'autoriser les hotes specifiques a utiliser sur le serveur
 
 
-	dnssec-enable yes;
+	dnssec-enable yes;    #permet d ajouter dnssec au dns 
   	dnssec-validation auto;
 
 	
 
 	
 
-    recursion no;
-    allow-transfer { none; };
-
+    recursion no;    
+    allow-transfer { none; }; 
 };
