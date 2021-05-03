@@ -10,10 +10,9 @@ $TTL 80000
 @	IN MX 10 mail 
 ; name servers - NS record								
 l1-6.ephec-ti.be.        IN     NS    ns.l1-6.ephec-ti.be.
-ns	    IN     A    135.125.101.227;
+ns	    IN     A    135.125.101.227;     ; name servers - A record
 
 
-; name servers - A record
-www         IN        A       135.125.101.227;
-b2b         IN        A       135.125.101.227;
-mail 		IN 		  A		  135.125.101.227;
+www         IN        A       135.125.101.227;    ;web servers - A record
+b2b         IN        A       135.125.101.227;	  ;web servers -A record
+mail 		IN 		  A		  135.125.101.227;	  ;mail servers -A record
