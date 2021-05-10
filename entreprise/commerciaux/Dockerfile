@@ -5,6 +5,7 @@ RUN apt-get install -y vim nano
 RUN apt-get install -y dnsutils net-tools iputils-ping
 RUN apt-get install -y curl elinks 
 RUN apt-get install iputils-ping
+#ajoute un utilisateur 
 RUN useradd -ms /bin/bash commerciaux
 
 USER commerciaux

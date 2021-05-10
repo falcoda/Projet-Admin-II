@@ -1,5 +1,6 @@
 <?php
-    $connexion = mysqli_connect('ip', 'user', 'mdp', 'myDb')or die('Erreur de connexion');
+    $connexion = mysqli_connect('192.168.8.4:3306', 'root', 'test', 'myDb')or die('Erreur de connexion');
+	//connexion à la base de donnée
 ?>
 <html lang = "fr">
 	<head>
@@ -10,9 +11,9 @@
 	<body>
 		<h1> site web intranet de Woodytoys </h1>
 		<?php
-				$test = mysqli_query($connexion,'SELECT * FROM objets;');
+				$test = mysqli_query($connexion,'SELECT * FROM objets;'); //permet de tout sélectionner dans la table objets
 			while($result = mysqli_fetch_row($test)) {
-				 print '<p>Article : '.$result[0].'. Prix : '.$result[1].'â‚¬</p>';
+				 print '<p>Article : '.$result[0].'. Prix : '.$result[1].'€</p>';//ajoute différents paragraphes
 			};
 			 mysqli_close($connexion);
 		?>

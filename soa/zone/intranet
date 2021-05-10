@@ -12,11 +12,15 @@ $TTL 604800      ; 1 day
 @ IN NS    ns.intranet.
 
 
-
+; enregistrement de type A de notre erp ( A record )
 erp            IN        A       192.168.8.1
 
-; name servers - A record
+; enregistrement de type A de notre name servers ( A record )
 ns             IN        A       192.168.8.2
+
+; enregistrement de type A de notre resolver ( A record )
 resolv         IN        A       192.168.8.3
+
+; enregistrement de type A de notre base de donnée ( A record )
 baseddon       IN        A       192.168.8.4
 

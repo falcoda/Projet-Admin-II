@@ -1,3 +1,4 @@
+#ce fichier permet de gèrer l'accès au site
 Order deny,allow
 deny from All
-allow from 192.168.0.0/255.255.0.0
+allow from 192.168.0.0/255.255.0.0  #autorise le réseau 192.168.....

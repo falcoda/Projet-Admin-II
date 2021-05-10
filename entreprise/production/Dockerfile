@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+# Permet d'installer les outils nécessaires
 RUN apt-get update && apt-get install -y 
 RUN apt-get install -y vim nano
 RUN apt-get install -y dnsutils net-tools iputils-ping
@@ -7,6 +8,7 @@ RUN apt-get install -y curl elinks
 RUN apt-get install iputils-ping
 RUN useradd -ms /bin/bash production
 
+#création d'un utilisateur
 USER production
 COPY resolv.conf /etc/resolv.conf
 

@@ -23,18 +23,8 @@ services:
     networks:
       interne:
           ipv4_address: 192.168.8.2
-      reseau_compta:
-          ipv4_address: 192.168.1.2
-      reseau_direction:
-          ipv4_address: 192.168.2.2
-      reseau_secretariat:
-          ipv4_address: 192.168.3.2
-      reseau_production:
-          ipv4_address: 192.168.4.2
-      reseau_hangar:
-          ipv4_address: 192.168.5.2
-      reseau_commerciaux:
-          ipv4_address: 192.168.6.2
+
+
     volumes:
       - ./soa/named.conf:/etc/bind/named.conf
       - ./soa/zone/8.168.192.in-addr.arpa:/etc/bind/master/8.168.192.in-addr.arpa
@@ -89,8 +79,8 @@ services:
     networks:
       reseau_compta:
           ipv4_address: 192.168.1.1
-      interne:
-          ipv4_address: 192.168.8.11
+
+      
     volumes:
       - ./entreprise/compta/resolv.conf:/etc/resolv.conf
     container_name: compta
@@ -101,8 +91,8 @@ services:
     networks:
       reseau_direction:
           ipv4_address: 192.168.2.1
-      interne:
-          ipv4_address: 192.168.8.12
+
+      
     volumes:
       - ./entreprise/direction/resolv.conf:/etc/resolv.conf
     links:
@@ -114,8 +104,7 @@ services:
     networks:
       reseau_secretariat:
           ipv4_address: 192.168.3.1
-      interne:
-          ipv4_address: 192.168.8.13
+      
     volumes:
       - ./entreprise/secretariat/resolv.conf:/etc/resolv.conf
     container_name: secretariat 
@@ -145,7 +134,9 @@ services:
           ipv4_address: 192.168.6.1
     volumes:
       - ./entreprise/commerciaux/resolv.conf:/etc/resolv.conf
-    container_name: commerciaux    
+    container_name: commerciaux  
+
+
     
 volumes:
     persistent:     
@@ -203,4 +194,5 @@ networks:
           driver: default
           config:
               - subnet: 192.168.6.0/24
-                gateway:  192.168.6.254              
+                gateway:  192.168.6.254        
+                 
