@@ -1,4 +1,5 @@
 zone "l1-6.ephec-ti.be"{                                         
         type master;                                                  
         file "/etc/bind/zones/db.l1-6.ephec-ti.be";
-};
+}; 
+#ici on defini la zone a utiliser dans ce fichier, il ets indiquer la zone, le chemin ou la trouver et la type de zone
