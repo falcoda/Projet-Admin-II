@@ -8,7 +8,8 @@ options {
 
 
 	dnssec-enable yes;    #permet d ajouter dnssec au dns 
-  	dnssec-validation auto;
+  	dnssec-validation yes;
+	dnssec-lookaside auto;
 
 	
 

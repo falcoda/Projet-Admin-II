@@ -1,4 +1,4 @@
-CREATE DATABASE;/*Création de la base de donnée*/
+CREATE DATABASE myDb;/*Création de la base de donnée*/
 USE myDb;
 CREATE USER 'coda' IDENTIFIED BY 'test'; /*utiliser la base de donnée*/
 GRANT ALL PRIVILEGES ON * . * TO 'coda';
