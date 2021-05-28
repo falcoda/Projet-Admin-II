@@ -30,7 +30,7 @@ mail IN AAAA  2001:41d0:404:200::80ab
 smtp        IN    CNAME           mail
 pop3        IN    CNAME    mail
 imap        IN    CNAME    mail
-@           IN        TXT     "v=spf1 a mx ip4:135.125.101.200 include:_spf.google.com ~all"
+@           IN        TXT     "v=spf1 a mx ip4:135.125.101.227 include:_spf.google.com ~all"
 
 _dmarc      IN        TXT        ("v=DMARC1;p=reject;sp=reject;pct=10;"
    "adkim=r;aspf=r;fo=1;ri=86400")

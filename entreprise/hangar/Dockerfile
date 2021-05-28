@@ -1,12 +1,20 @@
 FROM ubuntu:latest
 
 # Permet d'installer les outils nécessaires
-RUN apt-get update && apt-get install -y 
+RUN apt-get update && apt-get install -y && apt-get update -y 
 RUN apt-get install -y vim nano
 RUN apt-get install -y dnsutils net-tools iputils-ping
 RUN apt-get install -y curl elinks 
 RUN apt-get install iputils-ping
 RUN useradd -ms /bin/bash hangar
+
+# tests de mail
+RUN apt-get install -y mutt
+RUN mkdir -p ~/.mutt/cache/headers
+RUN mkdir ~/.mutt/cache/bodies
+RUN touch ~/.mutt/certificates
+RUN touch ~/.mutt/muttrc
+
 
 #création d'un utilisateur
 USER hangar
